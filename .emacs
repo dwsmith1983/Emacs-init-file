@@ -149,16 +149,18 @@
 ;; C/C++ configuration
 (require 'cc-mode)
 
+;; start yasnippets
+(require 'yasnippet)
+(yas-global-mode 1)
+
 ;; auto complete for C/C++
 (require 'auto-complete)
 
 ;; default config for auto-complete
 (require 'auto-complete-config)
 (ac-config-default)
-
-;; start yasnippets
-(require 'yasnippet)
-(yas-global-mode 1)
+;(ac-set-trigger-key "TAB")
+;(ac-set-trigger-key "<tab>")
 
 ;; auto complete C++-headers
 (defun my:ac-c-header-init ()
@@ -175,8 +177,7 @@
 ;; iedit key binding C-c ; for edit all variables when selected
 (define-key global-map (kbd "C-c ;") 'iedit-mode)
 
-;; start flymake-google-cpplint
-;; initialize by function
+;; start flymake-google-cpplint and initialize by function
 (defun my:flymake-google-init ()
   (require 'flymake-google-cpplint)
   (custom-set-variables
@@ -191,12 +192,25 @@
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
-;; turn on semantic as a backend to auto complete
+;; turn on semantic
+(require 'semantic)
+(global-semanticdb-minor-mode 1)
+(global-semantic-idle-scheduler-mode 1)
 (semantic-mode 1)
-(defun my:add-semantic-to-ac ()
-  (add-to-list 'ac-sources 'ac-source-semantic)
-  )
-(add-hook 'c-mode-common-hook 'my:add-semantic-to-ac)
+(semantic-add-system-include "/usr/include/c++/4.9.2")
+;(defun my:add-semantic-to-ac ()
+;  (add-to-list 'ac-sources 'ac-source-semantic)
+;  )
+;(add-hook 'c-mode-common-hook 'my:add-semantic-to-ac)
+
+;; company-mode and company-c-headers setup
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+(add-to-list 'company-backends 'company-c-headers)
+;(add-to-list 'company-c-headers-path-system "/usr/include/c++/4.9.2/")
+(setq company-backends (delete 'company-semantic company-backends))
+(define-key c-mode-map [(tab)] 'company-complete)
+(define-key c++-mode-map [(tab)] 'company-complete)
 
 ;; M-x compile smarter in order to guess language
 (require 'compile)
