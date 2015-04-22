@@ -149,30 +149,36 @@
 ;; C/C++ configuration
 (require 'cc-mode)
 
+;; company-mode and company-c-headers setup
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+(setq company-backends (delete 'company-semantic company-backends))
+(define-key c-mode-map [(tab)] 'company-complete)
+(define-key c++-mode-map [(tab)] 'company-complete)
+(add-to-list 'company-backends 'company-c-headers)
+
 ;; start yasnippets
 (require 'yasnippet)
 (yas-global-mode 1)
 
-;; auto complete for C/C++
+;; C++ auto completion mode for C/C++ headers
 (require 'auto-complete)
-
-;; default config for auto-complete
 (require 'auto-complete-config)
 (ac-config-default)
-;(ac-set-trigger-key "TAB")
-;(ac-set-trigger-key "<tab>")
-
-;; auto complete C++-headers
-(defun my:ac-c-header-init ()
+                                        
+(defun my:acc-c-header-init ()
   (require 'auto-complete-c-headers)
-  (add-to-list 'ac-sources 'ac-source-c-header)
+  (add-to-list 'ac-sources 'ac-source-c-headers)
   (add-to-list 'achead:include-directories
-               '"/usr/include/c++/4.9.2/")
+    '"/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1
+/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/x86_64-unknown-linux-gnu
+/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/backward
+      /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include
+      /usr/local/include
+      /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed
+      /usr/include"
+    )
   )
-
-;; call ac-c-headers from c/c++ hooks
-(add-hook 'c++-mode-hook 'my:ac-c-header-init)
-(add-hook 'c-mode-hook 'my:ac-c-header-init)
 
 ;; iedit key binding C-c ; for edit all variables when selected
 (define-key global-map (kbd "C-c ;") 'iedit-mode)
@@ -197,20 +203,12 @@
 (global-semanticdb-minor-mode 1)
 (global-semantic-idle-scheduler-mode 1)
 (semantic-mode 1)
-(semantic-add-system-include "/usr/include/c++/4.9.2")
+(semantic-add-system-include "/usr/include")
+(semantic-add-system-include "/usr/local/include/")
 ;(defun my:add-semantic-to-ac ()
 ;  (add-to-list 'ac-sources 'ac-source-semantic)
 ;  )
 ;(add-hook 'c-mode-common-hook 'my:add-semantic-to-ac)
-
-;; company-mode and company-c-headers setup
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-(add-to-list 'company-backends 'company-c-headers)
-;(add-to-list 'company-c-headers-path-system "/usr/include/c++/4.9.2/")
-(setq company-backends (delete 'company-semantic company-backends))
-(define-key c-mode-map [(tab)] 'company-complete)
-(define-key c++-mode-map [(tab)] 'company-complete)
 
 ;; M-x compile smarter in order to guess language
 (require 'compile)
