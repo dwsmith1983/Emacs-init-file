@@ -216,7 +216,7 @@
 (require 'compile)
 (defvar compile-guess-command-table
   '((c-mode       . "gcc -Wall -g %s -o %s -lm")
-    (c++-mode     . "g++ -Wall %s -o %s -std=c++14")
+    (c++-mode     . "g++ -Wall -Wextra -pedantic-errors %s -o %s -std=c++14")
     (fortran-mode . "gfortran -C %s -o %s")
     ))
 
