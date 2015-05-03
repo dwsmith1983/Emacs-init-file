@@ -139,12 +139,6 @@
  '(package-selected-packages (quote (rainbow-delimiters adaptive-wrap
                                                         auto-indent-mode)))
  '(server-mode t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 ;; C/C++ configuration
 (require 'cc-mode)
@@ -176,7 +170,8 @@
       /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include
       /usr/local/include
       /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed
-      /usr/include"
+      /usr/include
+      /usr/include/boost/compatibility/cpp_c_headers"
     )
   )
 
