@@ -170,8 +170,7 @@
       /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include
       /usr/local/include
       /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed
-      /usr/include
-      /usr/include/boost/compatibility/cpp_c_headers"
+      /usr/include"
     )
   )
 
