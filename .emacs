@@ -199,6 +199,14 @@
 (semantic-mode 1)
 (semantic-add-system-include "/usr/include")
 (semantic-add-system-include "/usr/local/include/")
+(semantic-add-system-include
+ "/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1")
+(semantic-add-system-include "/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/x86_64-unknown-linux-gnu")
+(semantic-add-system-include "/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/backward")
+(semantic-add-system-include
+ "/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include")
+(semantic-add-system-include
+ "/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed")
 ;(defun my:add-semantic-to-ac ()
 ;  (add-to-list 'ac-sources 'ac-source-semantic)
 ;  )
