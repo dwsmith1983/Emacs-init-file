@@ -215,10 +215,12 @@
 ;; M-x compile smarter in order to guess language
 (require 'compile)
 (defvar compile-guess-command-table
-  '((c-mode       . "gcc -Wall -g %s -o %s -lm")
-    (c++-mode     . "g++ -Wall -Wextra -pedantic-errors %s -o %s -std=c++14")
+  '((c-mode       . "gcc -Wall -Wextra -pedantic-erros -g %s -o %s -lm")
+    (c++-mode     .
+                  "clang++ -Wall -Wextra -pedantic-errors %s -o %s -std=c++14")
     (fortran-mode . "gfortran -C %s -o %s")
     ))
+;; clang++ can be changed to g++ for the GNU compiler
 
 (defun compile-guess-command ()
   (let ((command-for-mode (cdr (assq major-mode
